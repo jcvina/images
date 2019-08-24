@@ -1,0 +1,6 @@
+Uploading files to database - https://www.youtube.com/watch?v=TLgVEBuQURA
+
+Converting image to jpeg - https://stackoverflow.com/questions/31409506/python-convert-from-png-to-jpg-without-saving-file-to-disk-using-pil/48970633
+
+Check file size - https://stackoverflow.com/questions/2104080/how-to-check-file-size-in-python
+
