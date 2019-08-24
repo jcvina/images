@@ -77,7 +77,7 @@ def upload_image():
 
     else:
         code = 400
-        msg = 'Invalid file format, please upload an image (jpg or png).'
+        msg = 'Invalid file format, please upload an image (for example jpeg or png).'
         return jsonify(msg), code
 
 
@@ -88,21 +88,21 @@ def validate_image(file):
     size = file.tell()
     file.seek(old_file_position, os.SEEK_SET)
 
-    if size <= 26214400:
+    if size > 26214400:
         code = 400
         msg = 'The file is too big. Maximum size = 25 megabytes.'
         return jsonify(msg), code
 
     try:
         img = Image.open(file)
-        if img.format == 'PNG':
+        if img.format != 'JPEG':
             img = convert_to_jpeg(img)
         return img.format == 'JPEG'
     except IOError:
         return False
 
 
-# If image is PNG -> convert to JPG
+# If image is not JPEG -> convert to JPEG
 def convert_to_jpeg(img):
     with BytesIO() as i:
         img.save(i, format='JPEG')
