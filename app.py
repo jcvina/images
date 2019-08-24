@@ -60,6 +60,7 @@ def upload_image():
         id_image = str(imagehash.phash(img))
         image_name = os.path.splitext(image.filename)[0] + '.jpg'
         with BytesIO() as i:
+            img = img.convert('RGB')
             img.save(i, format='JPEG')
             value = i.getvalue()
         new_image = Images(id_image=id_image, image_name=image_name, image=value)
@@ -105,6 +106,7 @@ def validate_image(file):
 # If image is not JPEG -> convert to JPEG
 def convert_to_jpeg(img):
     with BytesIO() as i:
+        img = img.convert('RGB')
         img.save(i, format='JPEG')
         return Image.open(i)
 
