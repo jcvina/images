@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 from flask_marshmallow import Marshmallow
@@ -109,6 +109,17 @@ def convert_to_jpeg(img):
         img = img.convert('RGB')
         img.save(i, format='JPEG')
         return Image.open(i)
+
+
+# Get image by id
+@app.route('/images/<string:id_image>', methods=['GET'])
+def get_image(id_image):
+    image = Images.query.filter_by(id_image=id_image).first()
+    if image is None:
+        code = 400
+        msg = 'No image with the provided id has been found, please provide a valid id.'
+        return jsonify(msg), code
+    return send_file(BytesIO(image.image), attachment_filename=image.image_name, as_attachment=True)
 
 
 # Run server
