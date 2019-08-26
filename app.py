@@ -50,7 +50,7 @@ image_schema = ImagesSchema()
 def upload_image():
     try:
         image = request.files['image']
-    except BadRequestKeyError as e:
+    except BadRequestKeyError:
         code = 400
         msg = 'Please upload a valid file.'
         return jsonify(msg), code
@@ -69,7 +69,7 @@ def upload_image():
         db.session.add(new_image)
         try:
             db.session.commit()
-        except IntegrityError as e:
+        except IntegrityError:
             res = {"new": False, "url": "/images/" + id_image}
             return jsonify(res)
 
