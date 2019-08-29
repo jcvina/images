@@ -4,6 +4,7 @@
 ## Upload an Image:
 	 Call type: POST
 	 URL: http://127.0.0.1:5000/images
+	 Key: image
 	 Responses:
 		OK - If image isn't already in database:
 			State: 200 OK
@@ -44,3 +45,18 @@
 		ERROR - id is not found in database
 			State: 400 BAD REQUEST
 			"No image with the provided id has been found, please provide a valid id."
+			
+			
+## Docker Build:
+### Image:
+        Go to project directory.
+        Run "docker build -t images:latest ." (whithout the quotes).
+    
+### Container:
+        Run "docker run -it -d -p 5000:5000 images" (whithout the quotes).
+        See running containers: docker ps
+        Stop container: docker stop ContainerID
+        Start container: docker start ContainerID
+        
+        To use the images app please refer to the top of the document.
+  
